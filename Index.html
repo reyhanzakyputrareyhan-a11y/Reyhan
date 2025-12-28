@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Portfolio - Reyhan zaki putra</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+body{background:#0a0a0a;color:white;scroll-behavior:smooth;}
+
+/* ================= NAVBAR ================= */
+.navbar{display:flex;justify-content:space-between;align-items:center;padding:20px 60px;position:fixed;width:100%;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);z-index:100;}
+.logo{color:#ff0000;font-weight:bold;font-size:24px;}
+.navbar ul{list-style:none;display:flex;gap:25px;}
+.navbar ul li a{text-decoration:none;color:#ff0000;font-weight:bold;position:relative;transition:color 0.3s;}
+.navbar ul li a:hover,.navbar ul li a.active{color:#ff4d4d;}
+.navbar ul li a::after{content:'';position:absolute;width:0;height:2px;background:#ff0000;left:0;bottom:-5px;transition:0.3s;}
+.navbar ul li a:hover::after,.navbar ul li a.active::after{width:100%;}
+
+/* ================= HERO ================= */
+.hero{min-height:100vh;display:flex;justify-content:space-between;align-items:center;padding:120px 60px;flex-wrap:wrap;opacity:0;transform:translateY(50px);transition:1s;}
+.hero.visible{opacity:1;transform:translateY(0);}
+.hero-text{max-width:500px;}
+.hero-text h1 span,.hero-text h3 span{color:#ff0000;}
+.social a{color:#ff0000;font-size:20px;margin-right:15px;transition:0.3s;}
+.social a:hover{color:#ff4d4d;}
+.btn{margin-top:20px;padding:10px 25px;background:#ff0000;border:none;border-radius:25px;cursor:pointer;font-weight:bold;transition:0.3s;}
+.btn:hover{box-shadow:0 0 15px #ff0000;}
+
+/* ================= GLOW PHOTO ================= */
+.glow{width:260px;height:260px;border-radius:50%;padding:6px;background:linear-gradient(135deg,#ff0000,#ff4d4d,#ff0000);display:flex;align-items:center;justify-content:center;box-shadow:0 0 20px rgba(255,0,0,0.6),0 0 40px rgba(255,0,0,0.4),0 0 60px rgba(255,0,0,0.2);animation:neonPulse 4s ease-in-out infinite;}
+.glow img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#000;}
+.about-glow{width:180px;height:180px;}
+@keyframes neonPulse{0%{box-shadow:0 0 15px rgba(255,0,0,0.5),0 0 30px rgba(255,0,0,0.3);}50%{box-shadow:0 0 30px rgba(255,0,0,0.8),0 0 60px rgba(255,0,0,0.5);}100%{box-shadow:0 0 15px rgba(255,0,0,0.5),0 0 30px rgba(255,0,0,0.3);}}
+
+/* ================= ABOUT (HORIZONTAL) ================= */
+.about{display:flex;align-items:center;gap:60px;padding:80px 60px;flex-wrap:wrap;opacity:0;transform:translateY(50px);transition:1s;}
+.about.visible{opacity:1;transform:translateY(0);}
+.about-img,.about-text{flex:1;min-width:250px;}
+.about img{animation:swing 2s ease-in-out;}
+.about-text h2 span{color:#ff0000;}
+.about-text p{margin-top:15px;line-height:1.6;}
+
+/* ================= SKILLS ================= */
+.skills{padding:80px 60px;text-align:center;opacity:0;transform:translateY(50px);transition:1s;}
+.skills.visible{opacity:1;transform:translateY(0);}
+.skills h2{font-size:32px;margin-bottom:40px;}
+.tech{max-width:500px;margin:auto;text-align:left;}
+.tech p{margin-bottom:5px;}
+.tech .bar{background:#0b2a3d;height:10px;margin-bottom:15px;border-radius:5px;}
+.tech .bar div{height:10px;background:#ff0000;border-radius:5px;}
+
+/* ================= PORTFOLIO ================= */
+.portfolio{padding:80px 60px;text-align:center;opacity:0;transform:translateY(50px);transition:1s;}
+.portfolio.visible{opacity:1;transform:translateY(0);}
+.portfolio h2{font-size:32px;margin-bottom:40px;color:#ff0000;}
+.portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+.portfolio-item{background:#111;padding:15px;border-radius:10px;transition:0.3s;box-shadow:0 0 10px rgba(255,0,0,0.2);}
+.portfolio-item img{width:100%;border-radius:10px;margin-bottom:10px;}
+.portfolio-item h4{margin:10px 0 5px;color:#ff0000;}
+.portfolio-item p{font-size:14px;color:#aaa;margin-bottom:10px;}
+.portfolio-item .btn{font-size:14px;padding:7px 15px;border-radius:20px;}
+.portfolio-item:hover{box-shadow:0 0 25px #ff0000;transform:translateY(-5px);}
+
+/* ================= CONTACT ================= */
+.contact{display:flex;gap:40px;flex-wrap:wrap;padding:80px 60px;justify-content:center;opacity:0;transform:translateY(50px);transition:1s;}
+.contact.visible{opacity:1;transform:translateY(0);}
+.contact div{max-width:400px;text-align:center;}
+.contact-form{max-width:400px;display:flex;flex-direction:column;}
+.contact-form input,.contact-form textarea{width:100%;margin-bottom:15px;padding:10px;border-radius:10px;border:none;}
+.contact-form button{padding:10px 25px;background:#ff0000;border:none;border-radius:25px;color:white;font-weight:bold;cursor:pointer;transition:0.3s;}
+.contact-form button:hover{box-shadow:0 0 15px #ff0000;}
+
+footer{text-align:center;padding:30px;color:#aaa;}
+
+/* ================= RESPONSIVE ================= */
+@media(max-width:768px){
+  .hero,.about,.contact{flex-direction:column;text-align:center;}
+  .about{gap:30px;}
+  .about-img,.about-text{flex:unset;width:100%;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+<h2 class="logo">Portfolio</h2>
+<ul>
+  <li><a href="#home" class="nav-link active">Home</a></li>
+  <li><a href="#about" class="nav-link">About</a></li>
+  <li><a href="#skills" class="nav-link">Skills</a></li>
+  <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+  <li><a href="#contact" class="nav-link">Contact</a></li>
+</ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+<div class="hero-text">
+  <h4>Hello, It's Me</h4>
+  <h1>Reyhan<span>zaky putra</span></h1>
+  <h3>And I am a <span id="typing"></span></h3>
+  <p>I am a computer science student</p>
+  <div class="social">
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-github"></i></a>
+    <a href="#"><i class="fab fa-tiktok"></i></a>
+    <a href="#"><i class="fab fa-linkedin"></i></a>
+  </div>
+  <button class="btn">More About Me</button>
+</div>
+<div class="hero-img">
+  <div class="glow">
+    <img src="50.jpg" alt="Foto Bayu">
+  </div>
+</div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+<div class="about-img">
+  <div class="glow about-glow">
+    <img src="50.jpg" alt="Foto Bayu">
+  </div>
+</div>
+<div class="about-text">
+  <h2>About <span>Me</span></h2>
+  <h4>Reyhan zaky putra</h4>
+  <p>I am a Computer Science Student passionate about frontend & UI/UX design. I love creating websites with interactive design and neon effects.</p>
+  <button class="btn">More About Me</button>
+</div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills" id="skills">
+<h2>My Skills</h2>
+<div class="tech">
+  <p>HTML <span>90%</span></p>
+  <div class="bar"><div style="width:90%"></div></div>
+  <p>CSS <span>80%</span></p>
+  <div class="bar"><div style="width:80%"></div></div>
+  <p>JavaScript <span>70%</span></p>
+  <div class="bar"><div style="width:70%"></div></div>
+</div>
+</section>
+
+<!-- PORTFOLIO DUMMY -->
+<section class="portfolio" id="portfolio">
+<h2>Portfolio</h2>
+<div class="portfolio-grid">
+  <div class="portfolio-item">
+    <img src="https://via.placeholder.com/400x250.png?text=Project+1" alt="Project 1">
+    <h4>Website Toko Online</h4>
+    <p>Sebuah website e-commerce sederhana menggunakan HTML, CSS, dan JavaScript.</p>
+    <a href="#" class="btn">View Project</a>
+  </div>
+  <div class="portfolio-item">
+    <img src="https://via.placeholder.com/400x250.png?text=Project+2" alt="Project 2">
+    <h4>Portfolio UI/UX</h4>
+    <p>Desain konsep portofolio aplikasi mobile dengan Figma.</p>
+    <a href="#" class="btn">View Project</a>
+  </div>
+  <div class="portfolio-item">
+    <img src="https://via.placeholder.com/400x250.png?text=Project+3" alt="Project 3">
+    <h4>Mini Game</h4>
+    <p>Permainan tebak angka interaktif yang dibuat dengan JavaScript.</p>
+    <a href="#" class="btn">View Project</a>
+  </div>
+  <div class="portfolio-item">
+    <img src="https://via.placeholder.com/400x250.png?text=Project+4" alt="Project 4">
+    <h4>Landing Page Template</h4>
+    <p>Template landing page profesional yang bisa dikustomisasi untuk bisnis.</p>
+    <a href="#" class="btn">View Project</a>
+  </div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+<div>
+  <h2>Contact Me</h2>
+  <p>Email: Reyhanzakyputra@gmail.com</p>
+  <p>Phone: 08123456789</p>
+</div>
+<form class="contact-form">
+  <input type="text" placeholder="Your Name">
+  <input type="email" placeholder="Your Email">
+  <input type="text" placeholder="Subject">
+  <textarea placeholder="Message"></textarea>
+  <button>Submit</button>
+</form>
+</section>
+
+<footer>Developed with ❤️ by Reyhan Zaky Putra</footer>
+
+<script>
+// Typing effect
+const texts=["Frontend Developer","UI/UX Designer","Web Designer"];
+let count=0,index=0;
+(function type(){
+  const current=texts[count];
+  document.getElementById("typing").textContent=current.slice(0,++index);
+  if(index===current.length+1){count=(count+1)%texts.length;index=0;}
+  setTimeout(type,120);
+})();
+
+// Smooth scroll & active menu neon + fade-in
+const sections=document.querySelectorAll('section');
+const navLinks=document.querySelectorAll('.nav-link');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(section=>{
+    const sectionTop=section.offsetTop-80;
+    if(pageYOffset>=sectionTop){current=section.getAttribute('id');}
+  });
+  navLinks.forEach(link=>{
+    link.classList.remove('active');
+    if(link.getAttribute('href')==='#'+current){link.classList.add('active');}
+
+  sections.forEach(section=>{
+    const top=section.getBoundingClientRect().top;
+    const windowHeight=window.innerHeight;
+    if(top<windowHeight-100){section.classList.add('visible');}
+  });
+  });
+});
+navLinks.forEach(link=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    const target=document.querySelector(link.getAttribute('href'));
+    window.scrollTo({top:target.offsetTop-70,behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
